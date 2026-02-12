@@ -45,14 +45,14 @@ A lightweight AI-powered semantic search engine over markdown documentation file
 | **Chunker** | Custom TypeScript | Splits `.md` files by headings (`#`, `##`, `###`) into searchable chunks |
 | **Embeddings** | `@huggingface/transformers` (all-MiniLM-L6-v2) | Generates 384-dim vector embeddings locally — no external API needed |
 | **Vector Store** | Vectra (LocalIndex) | Stores embeddings as JSON on disk, performs cosine similarity search |
-| **LLM** | Claude API (`@anthropic-ai/sdk`) | Synthesizes natural language answers from retrieved context chunks |
+| **LLM** | Claude Sonnet 4 via `@anthropic-ai/sdk` | Synthesizes natural language answers from retrieved context chunks |
 
 ## Tech Stack
 
 - **Next.js + TypeScript** — Project foundation (future web UI ready)
 - **Vectra** — Local vector database, no server required
 - **@huggingface/transformers** — Local embedding model (all-MiniLM-L6-v2, ~23MB)
-- **@anthropic-ai/sdk** — Claude API for answer generation
+- **@anthropic-ai/sdk** — Claude Sonnet 4 (`claude-sonnet-4-20250514`) for answer generation
 - **dotenv** — Environment variable management
 
 ## Project Structure
@@ -170,7 +170,7 @@ The ingestion script uses upsert — existing chunks are updated, not duplicated
 
 4. **Search** — When you ask a question, it's embedded using the same model, then compared against all stored chunks via cosine similarity. The top 5 most relevant chunks are retrieved.
 
-5. **Answer Generation** — The retrieved chunks are sent as context to the Claude API along with your question. Claude generates a natural language answer citing the source files.
+5. **Answer Generation** — The retrieved chunks are sent as context to Claude Sonnet 4 (`claude-sonnet-4-20250514`) along with your question. Claude generates a natural language answer citing the source files.
 
 ## License
 

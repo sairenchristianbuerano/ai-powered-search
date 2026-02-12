@@ -9,7 +9,10 @@
       "Bash(git init:*)",
       "Bash(git remote add:*)",
       "Bash(git branch:*)",
-      "Bash(git status:*)"
+      "Bash(git status:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)",
+      "Bash(git stash pop:*)"
     ]
   }
 }
