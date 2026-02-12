@@ -47,7 +47,11 @@ function printResponse(res: SearchResponse): void {
       console.log(`    - ${file}`);
     }
     console.log(`\n  AI Answer:`);
-    console.log(`  ${res.answer}\n`);
+    const indented = res.answer
+      .split("\n")
+      .map((line) => `    ${line}`)
+      .join("\n");
+    console.log(`${indented}\n`);
   }
 }
 

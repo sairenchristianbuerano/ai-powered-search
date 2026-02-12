@@ -70,7 +70,11 @@ function printResponse(res: SearchResponse, platform: string | null): void {
       console.log(`    - ${file}`);
     }
     console.log(`\n  AI Answer:`);
-    console.log(`  ${res.answer}\n`);
+    const indented = res.answer
+      .split("\n")
+      .map((line) => `    ${line}`)
+      .join("\n");
+    console.log(`${indented}\n`);
     if (platform) {
       console.log(
         `  Tip: If the above components don't match your needs, you can build`
