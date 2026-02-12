@@ -93,10 +93,17 @@ npm install
 
 ### Configuration
 
-Create a `.env` file in the project root:
+Copy the example env file and add your API key:
+
+```bash
+cp .env.example .env
+```
+
+Then edit `.env` with your actual values:
 
 ```
-ANTHROPIC_API_KEY=sk-ant-your-api-key-here
+ANTHROPIC_API_KEY=your-api-key-here
+CLAUDE_MAX_TOKENS=2048
 ```
 
 ### Usage

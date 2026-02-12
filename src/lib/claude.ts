@@ -2,6 +2,8 @@ import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
+const MAX_TOKENS = parseInt(process.env.CLAUDE_MAX_TOKENS || "2048", 10);
+
 const KNOWN_PLATFORMS = [
   "langflow",
   "flowise",
@@ -40,16 +42,20 @@ export async function askClaude(
 
   const response = await client.messages.create({
     model: "claude-sonnet-4-20250514",
-    max_tokens: 1024,
+    max_tokens: MAX_TOKENS,
     messages: [
       {
         role: "user",
-        content: `You are an AI documentation assistant for a custom component library. Answer the question based ONLY on the provided documentation context.
+        content: `You are an AI documentation assistant for a custom component library.
 
-Rules:
-- Reference components by their markdown file name (e.g., "calculator-component.md")
-- Be concise and direct
-- If the context does not contain enough information, say so clearly
+Answer the question using ONLY the provided documentation context.
+
+Response format:
+- For each relevant component, write ONE short sentence describing what it does in plain language.
+- Use the format: "component-name.md — short description"
+- Keep each description under 20 words.
+- Do NOT include code examples, input/output details, or technical specs.
+- If no components match, say "No matching components found."
 
 Context:
 ${context}

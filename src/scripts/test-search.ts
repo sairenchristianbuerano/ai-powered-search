@@ -70,11 +70,7 @@ function printResponse(res: SearchResponse, platform: string | null): void {
       console.log(`    - ${file}`);
     }
     console.log(`\n  AI Answer:`);
-    const truncated =
-      res.answer.length > 400
-        ? res.answer.substring(0, 400) + "..."
-        : res.answer;
-    console.log(`  ${truncated}\n`);
+    console.log(`  ${res.answer}\n`);
     if (platform) {
       console.log(
         `  Tip: If the above components don't match your needs, you can build`
