@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "ingest": "tsx src/scripts/ingest.ts",
-    "search": "tsx src/scripts/search.ts"
+    "search": "tsx src/scripts/search.ts",
+    "test:search": "tsx src/scripts/test-search.ts"
   },
   "keywords": [],
   "author": "",
