@@ -1,3 +1,4 @@
+import "dotenv/config";
 import * as path from "path";
 import { chunkAllMarkdownFiles } from "../lib/chunker";
 import { upsertChunk } from "../lib/vectorstore";

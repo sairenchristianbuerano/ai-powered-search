@@ -1,3 +1,4 @@
+import "dotenv/config";
 import * as readline from "readline";
 import { search } from "../lib/vectorstore";
 import { askClaude } from "../lib/claude";
