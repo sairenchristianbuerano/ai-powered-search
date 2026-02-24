@@ -5,32 +5,32 @@ A lightweight AI-powered semantic search engine over markdown documentation file
 ## System Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                        INGESTION PIPELINE                       │
-│                        (npm run ingest)                         │
-│                                                                 │
-│  ┌──────────┐    ┌──────────────┐    ┌───────────┐    ┌──────┐ │
-│  │ docs/md/ │───▶│   Chunker    │───▶│ Embedding │───▶│Vectra│ │
-│  │ *.md     │    │ Split by     │    │ Model     │    │Vector│ │
-│  │ files    │    │ headings     │    │(MiniLM-L6)│    │Store │ │
-│  └──────────┘    └──────────────┘    └───────────┘    └──────┘ │
-│                                                          │      │
+┌──────────────────────────────────────────────────────────────────┐
+│                        INGESTION PIPELINE                        │
+│                        (npm run ingest)                          │
+│                                                                  │
+│  ┌──────────┐     ┌──────────────┐    ┌───────────┐    ┌──────┐  │
+│  │ docs/md/ │───▶ │   Chunker    │───▶│ Embedding │───▶│Vectra│ │
+│  │ *.md     │     │ Split by     │    │ Model     │    │Vector│  │
+│  │ files    │     │ headings     │    │(MiniLM-L6)│    │Store │  │
+│  └──────────┘     └──────────────┘    └───────────┘    └──────┘  │
+│                                                          │       │
 │                  Stored as: chunk text + embedding        │      │
 │                  + metadata (source file, heading)        │      │
-└──────────────────────────────────────────────────────────┼──────┘
+└──────────────────────────────────────────────────────────┼───────┘
                                                            │
                                               data/vectorstore/
                                                 index.json
                                                            │
 ┌──────────────────────────────────────────────────────────┼──────┐
 │                        SEARCH PIPELINE                   │      │
-│                        (npm run search)                   │      │
+│                        (npm run search)                  │      │
 │                                                          ▼      │
-│  ┌──────────┐    ┌───────────┐    ┌──────┐    ┌──────────────┐ │
+│  ┌──────────┐    ┌───────────┐    ┌──────┐    ┌──────────────┐  │
 │  │  User    │───▶│ Embedding │───▶│Vectra│───▶│  Claude API  │ │
-│  │ Question │    │ Model     │    │Top-K │    │  (Answer +   │ │
-│  │          │    │(MiniLM-L6)│    │Search│    │   Sources)   │ │
-│  └──────────┘    └───────────┘    └──────┘    └──────┬───────┘ │
+│  │ Question │    │ Model     │    │Top-K │    │  (Answer +   │  │
+│  │          │    │(MiniLM-L6)│    │Search│    │   Sources)   │  │
+│  └──────────┘    └───────────┘    └──────┘    └──────┬───────┘  │
 │                                                       │         │
 │  ┌────────────────────────────────────────────────────▼──────┐  │
 │  │  Output: AI-generated answer with source file citations   │  │
